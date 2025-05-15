@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #mensaje {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .product-section {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Registro de Cliente</h1>
+    <form id="clienteForm">
+        <div class="form-group">
+            <label for="name">Nombre completo:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="product-section">
+            <h3>Selección de Productos</h3>
+            <div class="form-group">
+                <label for="product">Producto:</label>
+                <select id="product" name="product" required>
+                    <option value="AE24">Portabebe Azul Explorador - $150,000</option>
+                    <option value="AP24">Portabebe Aguamarina Playero - $130,000</option>
+                    <option value="CE24">Portabebe Café Enérgico - $180,000</option>
+                    <option value="GA24">Portabebe Gris Aventurero - $150,000</option>
+                    <option value="MD24">Portabebe Moztaza Dinámico - $130,000</option>
+                    <option value="MV24">Portabebe Morado Viajero - $160,000</option>
+                    <option value="NA25">Portabebes Negro Aesthetic - $100,000</option>
+                    <option value="NV24">Portabebe Negro Viajero - $180,000</option>
+                    <option value="RD24">Portabebe Rumbo Divertido - $160,000</option>
+                    <option value="TA24">Portabebe Tierra Audaz - $200,000</option>
+                    <option value="VP24">Portabebe Verde Pionero - $180,000</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+            </div>
+        </div>
+        <button type="submit">Registrar Cliente</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <script>
+        document.getElementById('clienteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const mensajeDiv = document.getElementById('mensaje');
+            mensajeDiv.innerHTML = '<p style="color: blue;">Enviando datos...</p>';
+            
+            const datosCliente = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                product: document.getElementById('product').value,
+                quantity: document.getElementById('quantity').value,
+                date_creation:Math.floor(Date.now() / 1000)
+            };
+
+            try {
+                const respuesta = await fetch('https://hook.us2.make.com/wgn5gvlt3jc87bu6zsfk3gnhgbf0y5cp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosCliente)
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error(`Error: ${respuesta.status}`);
+                }
+
+                mensajeDiv.innerHTML = '<p style="color: green;">✅ Cliente registrado exitosamente</p>';
+                document.getElementById('clienteForm').reset();
+                
+            } catch (error) {
+                mensajeDiv.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+                console.error('Detalle del error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
