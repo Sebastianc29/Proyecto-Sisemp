@@ -3,73 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Cliente</title>
+    <title>Checkout</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 500px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            color: #333;
+            background-color: white;
         }
-        .form-group {
-            margin-bottom: 15px;
+        
+        /* Encabezado con logo */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        /* Estilos principales */
+        .checkout-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            color: #ECD4FF;
             font-weight: bold;
         }
-        input {
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ECD4FF;
+        }
+        
+        input, select {
             width: 100%;
-            padding: 8px;
+            padding: 12px;
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 14px;
+            background-color: white;
+            color: #333;
         }
+        
+        /* Tabla de productos */
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .product-table th {
+            text-align: left;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-bottom: 2px solid #ddd;
+            color: #333;
+        }
+        
+        .product-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+        
+        /* Botón */
         button {
-            background: #4CAF50;
+            background: #7e57c2;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 14px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-        }
-        button:hover {
-            background: #45a049;
-        }
-        #mensaje {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-        }
-        .product-section {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 25px;
+            transition: background 0.3s;
         }
         
+        button:hover {
+            background: #5e35b1;
+        }
+        
+        /* Mensajes */
+        #mensaje {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #ff4081;
+        }
+        
+        /* Selector de productos y cantidad */
+        .product-selector {
+            margin-top: 20px;
+        }
+        
+        .quantity-selector {
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    <h1>Registro de Cliente</h1>
-    <form id="clienteForm">
-        <div class="form-group">
-            <label for="name">Nombre completo:</label>
-            <input type="text" id="name" name="name" required>
+    <div class="checkout-container">
+        <!-- Encabezado con logo -->
+        <div class="header-container">
+            <img src="https://tukoali.com/wp-content/uploads/2024/10/Logo-Koali-Alta.png" alt="Logo Koali" class="logo">
+            <h1>Checkout</h1>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Teléfono:</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div class="product-section">
-            <h3>Selección de Productos</h3>
+        
+        <h2>Información del cliente</h2>
+        <form id="clienteForm">
             <div class="form-group">
-                <label for="product">Producto:</label>
+                <label for="name" class="required">Nombre completo</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" class="required">Teléfono</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <h2>Selección de producto</h2>
+            
+            <!-- Selector de productos -->
+            <div class="form-group product-selector">
+                <label for="product" class="required">Producto</label>
                 <select id="product" name="product" required>
                     <option value="AE24">Portabebe Azul Explorador - $150,000</option>
                     <option value="AP24">Portabebe Aguamarina Playero - $130,000</option>
@@ -77,23 +171,65 @@
                     <option value="GA24">Portabebe Gris Aventurero - $150,000</option>
                     <option value="MD24">Portabebe Moztaza Dinámico - $130,000</option>
                     <option value="MV24">Portabebe Morado Viajero - $160,000</option>
-                    <option value="NA25">Portabebes Negro Aesthetic - $100,000</option>
                     <option value="NV24">Portabebe Negro Viajero - $180,000</option>
                     <option value="RD24">Portabebe Rumbo Divertido - $160,000</option>
                     <option value="TA24">Portabebe Tierra Audaz - $200,000</option>
                     <option value="VP24">Portabebe Verde Pionero - $180,000</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="quantity">Cantidad:</label>
+            
+            <!-- Selector de cantidad -->
+            <div class="form-group quantity-selector">
+                <label for="quantity" class="required">Cantidad</label>
                 <input type="number" id="quantity" name="quantity" min="1" value="1" required>
             </div>
-        </div>
-        <button type="submit">Registrar Cliente</button>
-    </form>
-    <div id="mensaje"></div>
+            
+            <!-- Tabla de resumen -->
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list">
+                    <!-- Los productos se añadirán aquí dinámicamente -->
+                </tbody>
+            </table>
+
+            <button type="submit">Realizar pedido</button>
+        </form>
+        <div id="mensaje"></div>
+    </div>
 
     <script>
+        function updateProductTable() {
+            const productList = document.getElementById('product-list');
+            const selectedProduct = document.getElementById('product');
+            const quantity = document.getElementById('quantity').value;
+            
+            const selectedOption = selectedProduct.options[selectedProduct.selectedIndex];
+            const productName = selectedOption.text.split(' - ')[0];
+            const productPrice = selectedOption.text.split(' - ')[1];
+            const priceValue = parseFloat(productPrice.replace('$', '').replace(',', ''));
+            const subtotal = new Intl.NumberFormat('es-CO', {style: 'currency', currency: 'COP'}).format(priceValue * quantity);
+            
+            productList.innerHTML = `
+                <tr>
+                    <td>${productName}</td>
+                    <td>${quantity}</td>
+                    <td>${subtotal}</td>
+                </tr>
+            `;
+        }
+
+        // Actualizar la tabla cuando cambia el producto o la cantidad
+        document.getElementById('product').addEventListener('change', updateProductTable);
+        document.getElementById('quantity').addEventListener('input', updateProductTable);
+
+        // Inicializar la tabla al cargar la página
+        window.addEventListener('load', updateProductTable);
         document.getElementById('clienteForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -122,11 +258,11 @@
                     throw new Error(`Error: ${respuesta.status}`);
                 }
 
-                mensajeDiv.innerHTML = '<p style="color: green;">✅ Cliente registrado exitosamente</p>';
+                mensajeDiv.innerHTML = '<p style="color: green;"> Cliente registrado exitosamente</p>';
                 document.getElementById('clienteForm').reset();
                 
             } catch (error) {
-                mensajeDiv.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+                mensajeDiv.innerHTML = `<p style="color: red;"> Error: ${error.message}</p>`;
                 console.error('Detalle del error:', error);
             }
         });
