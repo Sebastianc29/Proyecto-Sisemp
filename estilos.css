@@ -1,0 +1,165 @@
+/* ==== Reset y tipografía ==== */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  color: #333;
+}
+
+/* ==== Layout general ==== */
+.checkout-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  height: 50px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #2e7d63; /* verde */
+  margin: 0;
+}
+
+/* ==== Títulos de sección ==== */
+h2 {
+  font-size: 20px;
+  color: #D4A9DD;
+  font-weight: bold;
+  margin: 30px 0 8px;
+}
+
+.section-divider {
+  border: none;
+  border-bottom: 1px solid #000;
+  margin: 0 0 20px;
+}
+
+/* ==== Form-groups ==== */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #D4A9DD;
+}
+
+.required::after {
+  content: " *";
+  color: #ff4081;
+}
+
+/* ==== Inputs y selects ==== */
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ==== Country fijo ==== */
+.country-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.country-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/* ==== Grid helpers ==== */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ==== Mensaje y botón (mantener igual) ==== */
+#mensaje {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  background: #7e57c2;
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 25px;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #5e35b1;
+}
+
+/* ==== Estilos para tablas estilo checkout ==== */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.product-table thead {
+  background-color: #f8f8f8;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.product-table th {
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Alineaciones: Cantidad al centro, Subtotal a la derecha */
+.product-table th:nth-child(2),
+.product-table td:nth-child(2) {
+  text-align: center;
+}
+.product-table th:nth-child(3),
+.product-table td:nth-child(3) {
+  text-align: right;
+}
+
+/* Fila de datos: fondo blanco por defecto */
+.product-table tbody tr {
+  background-color: #fff;
+}

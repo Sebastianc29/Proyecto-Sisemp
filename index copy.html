@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="checkout-container">
+    <!-- Encabezado con logo y título -->
+    <div class="header-container">
+      <img
+        src="https://tukoali.com/wp-content/uploads/2024/10/Logo-Koali-Alta.png"
+        alt="Logo Koali"
+        class="logo">
+      <h1>Checkout</h1>
+    </div>
+
+    <form id="clienteForm">
+      <!-- Sección: Información del cliente -->
+      <h2>Información del cliente</h2>
+      <hr class="section-divider">
+
+      <div class="form-group">
+        <label for="name" class="required">Nombre completo</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="required">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="required">Teléfono</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+
+      <!-- Sección: Detalles de facturación -->
+      <h2>Detalles de facturación</h2>
+      <hr class="section-divider">
+
+      <div class="form-group">
+        <label class="country-label">
+          País / Región <span class="required"></span>
+        </label>
+        <div class="country-value">Colombia</div>
+      </div>
+
+      <div class="grid grid-cols-2">
+        <div class="form-group">
+          <label for="billing_address_1" class="required">
+            Nombre de la calle y número de la casa
+          </label>
+          <input
+            type="text"
+            id="billing_address_1"
+            name="billing_address_1"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="billing_address_2">
+            Apartamento, habitación, etc. (opcional)
+          </label>
+          <input
+            type="text"
+            id="billing_address_2"
+            name="billing_address_2">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3">
+        <div class="form-group">
+          <label for="billing_state" class="required">Departamento</label>
+          <select id="billing_state" name="billing_state" required>
+            <option value="">Seleccione...</option>
+            <option>Bogotá D.C.</option>
+            <option>Amazonas</option>
+            <option>Antioquia</option>
+            <option>Arauca</option>
+            <option>Atlántico</option>
+            <option>Bolívar</option>
+            <option>Boyacá</option>
+            <option>Caldas</option>
+            <option>Caquetá</option>
+            <option>Casanare</option>
+            <option>Cauca</option>
+            <option>Cesar</option>
+            <option>Chocó</option>
+            <option>Córdoba</option>
+            <option>Cundinamarca</option>
+            <option>Guainía</option>
+            <option>Guaviare</option>
+            <option>Huila</option>
+            <option>La Guajira</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="billing_city" class="required">Ciudad</label>
+          <select id="billing_city" name="billing_city" required>
+            <option value="">Seleccione...</option>
+            <option>Bogotá D.C.</option>
+            <option>Medellín</option>
+            <option>Cali</option>
+            <option>Barranquilla</option>
+            <option>Cartagena</option>
+            <option>Cúcuta</option>
+            <option>Bucaramanga</option>
+            <option>Ibagué</option>
+            <option>Santa Marta</option>
+            <option>Pereira</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="billing_postcode" class="required">
+            Código postal / ZIP
+          </label>
+          <input
+            type="text"
+            id="billing_postcode"
+            name="billing_postcode"
+            required>
+        </div>
+      </div>
+
+      <!-- Sección: Selección de producto -->
+      <h2>Selección de producto</h2>
+      <hr class="section-divider">
+
+      <div class="form-group product-selector">
+        <label for="product" class="required">Producto</label>
+        <select id="product" name="product" required>
+          <option value="AE24">Portabebe Azul Explorador - $150,000</option>
+          <option value="AP24">Portabebe Aguamarina Playero - $130,000</option>
+          <option value="CE24">Portabebe Café Enérgico - $180,000</option>
+          <option value="GA24">Portabebe Gris Aventurero - $150,000</option>
+          <option value="MD24">Portabebe Moztaza Dinámico - $130,000</option>
+          <option value="MV24">Portabebe Morado Viajero - $160,000</option>
+          <option value="NV24">Portabebe Negro Viajero - $180,000</option>
+          <option value="RD24">Portabebe Rumbo Divertido - $160,000</option>
+          <option value="TA24">Portabebe Tierra Audaz - $200,000</option>
+          <option value="VP24">Portabebe Verde Pionero - $180,000</option>
+        </select>
+      </div>
+
+      <div class="form-group quantity-selector">
+        <label for="quantity" class="required">Cantidad</label>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          min="1"
+          value="1"
+          required>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="product-list">
+          <!-- Los productos se añadirán aquí dinámicamente -->
+        </tbody>
+      </table>
+
+      <button type="submit">Realizar pedido</button>
+    </form>
+
+    <div id="mensaje"></div>
+  </div>
+
+  <script>
+    function updateProductTable() {
+      const productList = document.getElementById('product-list');
+      const selectedProduct = document.getElementById('product');
+      const quantity = document.getElementById('quantity').value;
+
+      const selectedOption = selectedProduct.options[selectedProduct.selectedIndex];
+      const productName = selectedOption.text.split(' - ')[0];
+      const productPrice = selectedOption.text.split(' - ')[1];
+      const priceValue = parseFloat(
+        productPrice.replace('$', '').replace(',', '')
+      );
+      const subtotal = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP'
+      }).format(priceValue * quantity);
+
+      productList.innerHTML = `
+        <tr>
+          <td>${productName}</td>
+          <td>${quantity}</td>
+          <td>${subtotal}</td>
+        </tr>
+      `;
+    }
+
+    document.getElementById('product').addEventListener('change', updateProductTable);
+    document.getElementById('quantity').addEventListener('input', updateProductTable);
+    window.addEventListener('load', updateProductTable);
+
+    document.getElementById('clienteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const mensajeDiv = document.getElementById('mensaje');
+      mensajeDiv.innerHTML = '<p style="color: blue;">Enviando datos...</p>';
+
+      const datosCliente = {
+        name:   document.getElementById('name').value,
+        email:  document.getElementById('email').value,
+        phone:  document.getElementById('phone').value,
+        product:   document.getElementById('product').value,
+        quantity:  document.getElementById('quantity').value,
+        date_creation: Math.floor(Date.now()/1000)
+      };
+
+      try {
+        const respuesta = await fetch(
+          'https://hook.us2.make.com/wgn5gvlt3jc87bu6zsfk3gnhgbf0y5cp',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datosCliente)
+          }
+        );
+
+        if (!respuesta.ok) {
+          throw new Error(`Error: ${respuesta.status}`);
+        }
+
+        mensajeDiv.innerHTML = '<p style="color: green;">Cliente registrado exitosamente</p>';
+        document.getElementById('clienteForm').reset();
+      } catch (error) {
+        mensajeDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        console.error('Detalle del error:', error);
+      }
+    });
+  </script>
+</body>
+</html>
